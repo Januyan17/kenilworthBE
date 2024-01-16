@@ -45,23 +45,6 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Delete a Employee with the specified employeeID in the request
-exports.delete = (req, res) => {
-  ModelName.remove(req.params.employeeID, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found Employee with id ${req.params.employeeID}.`,
-        });
-      } else {
-        res.status(500).send({
-          message: "Could not delete Employee with id " + req.params.employeeID,
-        });
-      }
-    } else res.send({ message: `Employee was deleted successfully!` });
-  });
-};
-
 exports.sendOTP = (req, res, next) => {
   ModelName.sendOTP(req.params.email, req.body)
     .then(function (user) {
